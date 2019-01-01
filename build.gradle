@@ -5,11 +5,9 @@ buildscript {
             apiguardian : '1.0.0',
             mockitoCore : '2.23.4',
             springBoot : '2.1.1.RELEASE',
-            mysqlConnector : '8.0.13',
-            lombok : '1.18.4'
+            lombok : '1.18.4',
     ]
     repositories {
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -19,8 +17,13 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.sasachichito'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
     jcenter()
@@ -28,14 +31,15 @@ repositories {
 }
 
 dependencies {
-    testCompile "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiterVersion}"
-    testCompile "org.junit.jupiter:junit-jupiter-params:${versions.junitJupiterVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiterVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${versions.junitJupiterVersion}"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "mysql:mysql-connector-java:${versions.mysqlConnector}"
+    runtimeOnly "mysql:mysql-connector-java"
     compileOnly "org.projectlombok:lombok:${versions.lombok}"
 }

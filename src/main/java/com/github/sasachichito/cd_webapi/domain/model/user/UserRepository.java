@@ -1,4 +1,4 @@
-package domain.model.user;
+package com.github.sasachichito.cd_webapi.domain.model.user;
 
 import java.util.List;
 

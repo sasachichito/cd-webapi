@@ -1,9 +1,10 @@
-package port.adapter.persistence;
+package com.github.sasachichito.cd_webapi.port.adapter.persistence;
 
-import domain.model.user.User;
-import domain.model.user.UserName;
-import domain.model.user.UserRepository;
+import com.github.sasachichito.cd_webapi.domain.model.user.User;
+import com.github.sasachichito.cd_webapi.domain.model.user.UserName;
+import com.github.sasachichito.cd_webapi.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.Map;
@@ -22,11 +23,14 @@ public class MySqlUserRepository implements UserRepository {
 
     @Override
     public User ofName(UserName userName) {
-        Map<String, Object> result = this.jdbcTemplate.queryForMap("SELECT * FROM my_user WHERE name = ?", userName.name());
-        String name = (String)result.get("name");
-        if (name == null || name.isEmpty()) {
+        String name;
+        try {
+            Map<String, Object> result = this.jdbcTemplate.queryForMap("SELECT * FROM my_user WHERE name = ?", userName.name());
+            name = (String)result.get("name");
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
+
         return new User(new UserName(name));
     }
 

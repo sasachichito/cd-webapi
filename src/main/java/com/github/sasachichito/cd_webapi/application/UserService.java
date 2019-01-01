@@ -1,8 +1,8 @@
-package application;
+package com.github.sasachichito.cd_webapi.application;
 
-import domain.model.user.User;
-import domain.model.user.UserName;
-import domain.model.user.UserRepository;
+import com.github.sasachichito.cd_webapi.domain.model.user.User;
+import com.github.sasachichito.cd_webapi.domain.model.user.UserName;
+import com.github.sasachichito.cd_webapi.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
