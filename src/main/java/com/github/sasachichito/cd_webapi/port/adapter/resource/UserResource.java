@@ -1,4 +1,4 @@
-package com.github.sasachichito.cd_webapi.port.adapter.web;
+package com.github.sasachichito.cd_webapi.port.adapter.resource;
 
 import com.github.sasachichito.cd_webapi.application.UserService;
 import com.github.sasachichito.cd_webapi.application.presentationmodel.UserPresentationModel;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserResource {
 
     @Autowired
     UserService userService;

@@ -13,6 +13,10 @@ public class UserPresentationModel {
     }
 
     private void initializeFrom(User user) {
+        if (user == null) {
+            this.userName = "";
+            return;
+        }
         this.userName = user.name().name();
     }
 
