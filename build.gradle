@@ -5,7 +5,7 @@ buildscript {
             apiguardian : '1.0.0',
             mockitoCore : '2.23.4',
             springBoot : '2.1.1.RELEASE',
-            h2database : '1.4.197'
+            mysqlConnector : '8.0.13'
     ]
     repositories {
         jcenter()
@@ -32,5 +32,6 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
-    implementation "com.h2database:h2:${versions.h2database}"
+
+    implementation "mysql:mysql-connector-java:${versions.mysqlConnector}"
 }
