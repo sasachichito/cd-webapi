@@ -33,5 +33,7 @@ dependencies {
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
 
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "mysql:mysql-connector-java:${versions.mysqlConnector}"
 }
