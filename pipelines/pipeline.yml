@@ -29,7 +29,7 @@ jobs:
     plan:
       - get: cd_webapi_repo
         passed: [ acceptance ]
-        trigger: true
+        #trigger: true
       - task: build
         file: cd_webapi_repo/pipelines/performance/build.yml
 

@@ -11,6 +11,9 @@ $ fly --target tutorial sync
 # Pipelineセット
 $ fly -t tutorial set-pipeline -c pipelines/pipeline.yml -p deployment-pipeline
 $ fly -t tutorial unpause-pipeline -p deployment-pipeline
+
+# (手動トリガー)
+$ fly -t tutorial trigger-job -j deployment-pipeline/commit
 ```
 
 ### App用DB構築
