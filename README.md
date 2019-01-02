@@ -4,8 +4,13 @@
 $ wget https://raw.githubusercontent.com/starkandwayne/concourse-tutorial/master/docker-compose.yml
 $ docker-compose up -d
 
-# Pipelineセット
+# ターゲット作成
+$ fly --target tutorial login --concourse-url http://127.0.0.1:8080 -u admin -p admin
+$ fly --target tutorial sync
 
+# Pipelineセット
+$ fly -t tutorial set-pipeline -c pipelines/pipeline.yml -p deployment-pipeline
+$ fly -t tutorial unpause-pipeline -p deployment-pipeline
 ```
 
 ### App用DB構築

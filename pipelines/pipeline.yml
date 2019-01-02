@@ -13,7 +13,7 @@ jobs:
       - get: cd_webapi_repo
         trigger: true
       - task: build
-        file: cd_webapi/pipelines/commit/build.yml
+        file: cd_webapi_repo/pipelines/commit/build.yml
 
   - name: acceptance
     public: true
@@ -22,7 +22,7 @@ jobs:
         passed: [ commit ]
         trigger: true
       - task: build
-        file: cd_webapi/pipelines/acceptance/build.yml
+        file: cd_webapi_repo/pipelines/acceptance/build.yml
 
   - name: performance
     public: true
@@ -31,7 +31,7 @@ jobs:
         passed: [ acceptance ]
         trigger: true
       - task: build
-        file: cd_webapi/pipelines/performance/build.yml
+        file: cd_webapi_repo/pipelines/performance/build.yml
 
   - name: uat
     public: true
@@ -40,7 +40,7 @@ jobs:
         passed: [ acceptance ]
         trigger: true
       - task: build
-        file: cd_webapi/pipelines/uat/build.yml
+        file: cd_webapi_repo/pipelines/uat/build.yml
 
   - name: production
     public: true
@@ -49,4 +49,4 @@ jobs:
         passed: [ performance, uat ]
         trigger: true
       - task: build
-        file: cd_webapi/pipelines/production/build.yml
+        file: cd_webapi_repo/pipelines/production/build.yml
