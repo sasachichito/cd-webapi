@@ -8,7 +8,7 @@ image_resource:
     tag: '8'
 
 inputs:
-  - name: cd_webapi_repo
+  - name: cd_webapi
 
 run:
   path: echo

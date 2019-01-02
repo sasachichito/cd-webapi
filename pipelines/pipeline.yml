@@ -1,6 +1,6 @@
 ---
 resources:
-  - name: cd_webapi_repo
+  - name: cd_webapi
     type: git
     source:
       uri: https://github.com/sasachichito/cd_webapi.git
@@ -10,43 +10,43 @@ jobs:
   - name: commit
     public: true
     plan:
-      - get: cd_webapi_repo
+      - get: cd_webapi
         trigger: true
       - task: build
-        file: cd_webapi_repo/pipelines/commit/build.yml
+        file: cd_webapi/pipelines/commit/build.yml
 
   - name: acceptance
     public: true
     plan:
-      - get: cd_webapi_repo
+      - get: cd_webapi
         passed: [ commit ]
         trigger: true
       - task: build
-        file: cd_webapi_repo/pipelines/acceptance/build.yml
+        file: cd_webapi/pipelines/acceptance/build.yml
 
   - name: performance
     public: true
     plan:
-      - get: cd_webapi_repo
+      - get: cd_webapi
         passed: [ acceptance ]
-        #trigger: true
+        trigger: true
       - task: build
-        file: cd_webapi_repo/pipelines/performance/build.yml
+        file: cd_webapi/pipelines/performance/build.yml
 
   - name: uat
     public: true
     plan:
-      - get: cd_webapi_repo
+      - get: cd_webapi
         passed: [ acceptance ]
-        trigger: true
+        #trigger: true
       - task: build
-        file: cd_webapi_repo/pipelines/uat/build.yml
+        file: cd_webapi/pipelines/uat/build.yml
 
   - name: production
     public: true
     plan:
-      - get: cd_webapi_repo
+      - get: cd_webapi
         passed: [ performance, uat ]
         trigger: true
       - task: build
-        file: cd_webapi_repo/pipelines/production/build.yml
+        file: cd_webapi/pipelines/production/build.yml
