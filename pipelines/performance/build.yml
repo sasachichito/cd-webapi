@@ -11,5 +11,5 @@ inputs:
   - name: cd_webapi_repo
 
 run:
-  path: path: echo
+  path: echo
   args: [this is performance stage]

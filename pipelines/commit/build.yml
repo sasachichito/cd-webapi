@@ -7,9 +7,9 @@ image_resource:
     repository: java
     tag: '8'
 
-#inputs:
-#  - name: cd_webapi_repo
+inputs:
+  - name: cd_webapi_repo
 
 run:
-  path: path: echo
+  path: echo
   args: [this is commit stage]
