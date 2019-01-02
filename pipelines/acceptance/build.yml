@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: java
+    tag: '8'
+
+inputs:
+  - name: cd_webapi_repo
+
+run:
+  path: path: echo
+  args: [this is acceptance stage]
