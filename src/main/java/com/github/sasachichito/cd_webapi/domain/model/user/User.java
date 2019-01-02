@@ -8,6 +8,9 @@ public class User {
     private UserName userName;
 
     public User(UserName userName) {
+        if (userName == null) {
+            throw new IllegalArgumentException("userName must be not null");
+        }
         this.userName = userName;
     }
 

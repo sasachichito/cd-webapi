@@ -1,7 +1,6 @@
 buildscript {
     ext.versions = [
-            junitPlatformPlugin : '1.0.1',
-            junitJupiterVersion : '5.0.1',
+            junitJupiterVersion : '5.0.0',
             apiguardian : '1.0.0',
             mockitoCore : '2.23.4',
             springBoot : '2.1.1.RELEASE',
@@ -11,7 +10,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.junit.platform:junit-platform-gradle-plugin:${versions.junitPlatformPlugin}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${versions.springBoot}"
     }
 }
@@ -31,12 +29,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiterVersion}"
+    // test
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${versions.springBoot}") {
+        exclude module: 'junit'
+    }
     testImplementation "org.junit.jupiter:junit-jupiter-params:${versions.junitJupiterVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiterVersion}"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-web"
