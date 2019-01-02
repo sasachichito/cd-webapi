@@ -9,3 +9,15 @@ $ mysql -u root -p -h 127.0.0.1 -e 'create database if not exists my_db;'
 $ ./gradlew build
 $ java -Dspring.profiles.active=dev -jar build/libs/cd_webapi-0.0.1-SNAPSHOT.jar
 ```
+
+# 公開API
+```
+# ユーザー一覧
+$ curl -w '\n' 'http://localhost:8080/users/' -X GET
+
+# ユーザー情報
+$ curl -w '\n' 'http://localhost:8080/users/fugafuga' -X GET
+
+# ユーザー登録
+$ curl -w '\n' 'http://localhost:8080/users/XXXXXXXXXXXX' -X POST
+```
