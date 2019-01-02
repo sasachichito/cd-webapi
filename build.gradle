@@ -1,19 +1,29 @@
 buildscript {
     ext.versions = [
-            junitJupiterVersion : '5.0.0',
-            apiguardian : '1.0.0',
-            mockitoCore : '2.23.4',
-            springBoot : '2.1.1.RELEASE',
-            lombok : '1.18.4',
+        junitJupiterVersion : '5.0.0',
+        apiguardian : '1.0.0',
+        mockitoCore : '2.23.4',
+        springBoot : '2.1.1.RELEASE',
+        lombok : '1.18.4',
+        mysqlConnecter : '8.0.13',
+    ]
+    ext.flyway = [
+        url : 'jdbc:mysql://localhost:3306/my_db',
+        user : 'root',
+        password : 'mysql',
     ]
     repositories {
         mavenCentral()
     }
     dependencies {
+        classpath "mysql:mysql-connector-java:${versions.mysqlConnecter}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${versions.springBoot}"
     }
 }
 
+plugins {
+    id "org.flywaydb.flyway" version "5.2.4"
+}
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -29,6 +39,12 @@ repositories {
 }
 
 dependencies {
+    // main
+    implementation "org.springframework.boot:spring-boot-starter-jdbc:${versions.springBoot}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}"
+    runtimeOnly "mysql:mysql-connector-java:${versions.mysqlConnecter}"
+    compileOnly "org.projectlombok:lombok:${versions.lombok}"
+
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test:${versions.springBoot}") {
         exclude module: 'junit'
@@ -38,9 +54,10 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
+}
 
-    implementation "org.springframework.boot:spring-boot-starter-jdbc"
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    runtimeOnly "mysql:mysql-connector-java"
-    compileOnly "org.projectlombok:lombok:${versions.lombok}"
+flyway {
+    url = flyway.url
+    user = flyway.user
+    password = flyway.password
 }
