@@ -4,13 +4,16 @@ import com.github.sasachichito.cd_webapi.domain.model.user.User;
 import com.github.sasachichito.cd_webapi.domain.model.user.UserName;
 import com.github.sasachichito.cd_webapi.domain.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.Map;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
+@Profile("prod")
 public class MySqlUserRepository implements UserRepository {
 
     @Autowired
@@ -36,6 +39,11 @@ public class MySqlUserRepository implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        return (List)this.jdbcTemplate.queryForList("SELECT * FROM my_user");
+        List<Map<String, Object>> results = this.jdbcTemplate.queryForList("SELECT * FROM my_user");
+        return results.stream()
+            .map(oneRecode -> {
+                UserName userName = new UserName((String) oneRecode.get("name"));
+                return new User(userName);})
+            .collect(Collectors.toList());
     }
 }

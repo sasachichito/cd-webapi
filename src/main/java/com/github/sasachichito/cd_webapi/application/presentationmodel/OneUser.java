@@ -3,12 +3,12 @@ package com.github.sasachichito.cd_webapi.application.presentationmodel;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.sasachichito.cd_webapi.domain.model.user.User;
 
-public class UserPresentationModel {
+public class OneUser {
 
     @JsonValue
     private String userName;
 
-    public UserPresentationModel(User user) {
+    public OneUser(User user) {
         this.initializeFrom(user);
     }
 

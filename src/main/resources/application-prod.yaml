@@ -8,3 +8,4 @@ spring:
     username: root
     password: mysql
     initialization-mode: always
+    platform: prod # for exec data-prod.sql, schema-prod.sql

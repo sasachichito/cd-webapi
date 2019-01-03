@@ -1,7 +1,8 @@
 package com.github.sasachichito.cd_webapi.port.adapter.resource;
 
 import com.github.sasachichito.cd_webapi.application.UserService;
-import com.github.sasachichito.cd_webapi.application.presentationmodel.UserPresentationModel;
+import com.github.sasachichito.cd_webapi.application.presentationmodel.OneUser;
+import com.github.sasachichito.cd_webapi.application.presentationmodel.Users;
 import com.github.sasachichito.cd_webapi.domain.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,13 +24,14 @@ public class UserResource {
     }
 
     @RequestMapping(method= RequestMethod.GET, value="{name}")
-    public UserPresentationModel ofName(@PathVariable String name) {
+    public OneUser ofName(@PathVariable String name) {
         User user = this.userService.ofName(name);
-        return new UserPresentationModel(user);
+        return new OneUser(user);
     }
 
     @RequestMapping(method= RequestMethod.GET)
-    public List<User> all() {
-        return userService.getAll();
+    public Users all() {
+        List<User> users = userService.getAll();
+        return new Users(users);
     }
 }
