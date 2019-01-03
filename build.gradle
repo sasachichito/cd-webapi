@@ -6,6 +6,7 @@ buildscript {
         springBoot : '2.1.1.RELEASE',
         lombok : '1.18.4',
         mysqlConnecter : '8.0.13',
+        cucumber : '2.3.1',
     ]
     ext.flyway = [
         url : 'jdbc:mysql://localhost:3306/my_db',
@@ -41,10 +42,8 @@ repositories {
 
 sourceSets {
     testAcceptance {
-        //compileClasspath += sourceSets.main.output + configurations.testCompile
         compileClasspath = sourceSets.test.compileClasspath
-        //runtimeClasspath += output + compileClasspath + configurations.testCompile
-        runtimeClasspath = sourceSets.test.runtimeClasspath
+        runtimeClasspath = output + sourceSets.test.runtimeClasspath
     }
 }
 
@@ -55,7 +54,7 @@ dependencies {
     runtimeOnly "mysql:mysql-connector-java:${versions.mysqlConnecter}"
     compileOnly "org.projectlombok:lombok:${versions.lombok}"
 
-    // test, acceptance
+    // test,acceptance
     testImplementation("org.springframework.boot:spring-boot-starter-test:${versions.springBoot}") {
         exclude module: 'junit'
     }
@@ -64,6 +63,8 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
+    testImplementation "io.cucumber:cucumber-java:${versions.cucumber}"
+    testImplementation "io.cucumber:cucumber-junit:${versions.cucumber}"
 }
 
 task testAcceptance(type: Test) {
