@@ -33,9 +33,19 @@ group = 'com.github.sasachichito'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+
 repositories {
     jcenter()
     mavenCentral()
+}
+
+sourceSets {
+    testAcceptance {
+        //compileClasspath += sourceSets.main.output + configurations.testCompile
+        compileClasspath = sourceSets.test.compileClasspath
+        //runtimeClasspath += output + compileClasspath + configurations.testCompile
+        runtimeClasspath = sourceSets.test.runtimeClasspath
+    }
 }
 
 dependencies {
@@ -45,7 +55,7 @@ dependencies {
     runtimeOnly "mysql:mysql-connector-java:${versions.mysqlConnecter}"
     compileOnly "org.projectlombok:lombok:${versions.lombok}"
 
-    // test
+    // test, acceptance
     testImplementation("org.springframework.boot:spring-boot-starter-test:${versions.springBoot}") {
         exclude module: 'junit'
     }
@@ -54,6 +64,11 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiterVersion}"
     testCompileOnly "org.apiguardian:apiguardian-api:${versions.apiguardian}"
     testCompile "org.mockito:mockito-core:${versions.mockitoCore}"
+}
+
+task testAcceptance(type: Test) {
+    testClassesDirs = sourceSets.testAcceptance.output
+    classpath = sourceSets.testAcceptance.runtimeClasspath
 }
 
 flyway {
